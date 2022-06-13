@@ -2,19 +2,11 @@ package com.s3rius.jmeterPlugins.JWTEncoder;
 
 import org.apache.jmeter.config.gui.AbstractConfigGui;
 import org.apache.jmeter.testelement.TestElement;
-import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultHighlighter;
-import javax.swing.text.Highlighter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.Highlighter.Highlight;
-import javax.swing.text.Highlighter.HighlightPainter;
-
 import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -193,6 +185,8 @@ public class JWTEncoderGUI extends AbstractConfigGui {
         Color numberColor = Color.decode("#BD93F9");
 
         this.jwtClaimsField.setBackground(bgColor);
+        this.jwtClaimsField.setCaretColor(fgColor);
+        this.jwtClaimsField.setForeground(fgColor);
 
         SimpleAttributeSet foregroundAttr = new SimpleAttributeSet();
         StyleConstants.setForeground(foregroundAttr, fgColor);
