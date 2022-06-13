@@ -17,3 +17,18 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
+      - name: get version
+        run: |
+          echo "APP_VERSION=$(cat pom.xml | grep version | head -n 2 | tail -n 1 | cut -d '>' -f2 | cut -d '<' -f1)" >> $GITHUB_ENV
+      - name: Save sha checksum
+        shell: bash
+        run: |
+          shasum -a 256 target/jmeterPlugins-${{ env.APP_VERSION }}.jar > target/checksum.sha256
+      - name: Releasing assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/jmeterPlugins-${{ env.APP_VERSION }}.jar
+            target/checksum.sha256
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
